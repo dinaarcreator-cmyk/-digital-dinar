@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DIGITAL DINAR - Where Trust Meets Technology</title>
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', sans-serif; }
+  body { background: radial-gradient(circle at top, #0f0f2e 0%, #000000 70%); color:#fff; overflow-x:hidden; }
+  .hero { text-align:center; padding:80px 20px 40px; }
+  .hero h1 { font-size:3rem; background:linear-gradient(90deg,#FFD700,#FFA500); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .hero p { color:#aaa; margin-top:10px; font-size:1.2rem; }
+  .btn { display:inline-block; margin:20px 10px; padding:14px 30px; background:linear-gradient(90deg,#FFD700,#FFA500); color:#000; font-weight:900; border-radius:50px; text-decoration:none; border:none; cursor:pointer; }
+  .btn-blue { background:linear-gradient(90deg,#007BFF,#00D4FF); color:#fff; }
+  .card { background:rgba(255,255,255,0.05); border:1px solid rgba(255,215,0,0.3); border-radius:15px; padding:25px; margin:15px; }
+  .section { max-width:1100px; margin:0 auto; padding:50px 20px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; }
+  input { width:100%; padding:14px; margin:10px 0; border-radius:10px; border:1px solid #333; background:#111; color:#fff; font-size:16px; }
+  #dinar-canvas { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:999; }
+  .floating-dinar { position:fixed; z-index:1000; pointer-events:auto; cursor:pointer; filter:drop-shadow(0 0 12px #FFD700); animation:floatUp linear infinite; user-select:none; }
+  @keyframes floatUp { 0%{transform:translateY(110vh) rotate(0deg); opacity:0;} 10%{opacity:1;} 90%{opacity:1;} 100%{transform:translateY(-10vh) rotate(360deg); opacity:0;} }
+  .gold-burst { position:fixed; pointer-events:none; z-index:1001; font-size:22px; animation:burst 0.8s ease-out forwards; }
+  @keyframes burst { 0%{transform:scale(0.5); opacity:1;} 100%{transform:translateY(-80px) scale(1.5); opacity:0;} }
+  .balance-box { position:fixed; top:15px; right:15px; background:rgba(0,0,0,0.8); border:2px solid #FFD700; padding:10px 18px; border-radius:50px; z-index:2000; font-weight:900; color:#FFD700; }
+</style>
+</head>
+<body>
+
+<div class="balance-box">🪙 <span id="ddnBalance">0</span> DDN</div>
+<canvas id="dinar-canvas"></canvas>
+<div id="dinar-container"></div>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>👑 DIGITAL DINAR</h1>
+  <p>Where Trust Meets Technology</p>
+  <p style="font-size:0.9rem; color:#FFD700;">Secure OTP • Premium Experience • Built for Future</p>
+  <a href="#login" class="btn">LOGIN / SIGNUP</a>
+  <a href="#locked" class="btn btn-blue">VIEW LOCKED COINS 🔒</a>
+</div>
+
+<!-- LOGIN -->
+<div class="section" id="login">
+  <div class="card" style="max-width:450px; margin:0 auto; text-align:center;">
+    <h2>Login / Signup</h2>
+    <p style="color:#aaa; font-size:0.9rem;">OTP will be sent to your Email</p>
+    <input type="email" id="email" placeholder="Enter your Email">
+    <button class="btn" onclick="sendOTP()">SEND OTP</button>
+    <input type="text" id="otpInput" placeholder="Enter OTP">
+    <button class="btn btn-blue" onclick="verifyOTP()">VERIFY & LOGIN</button>
+    <p id="loginMsg" style="color:#4CAF50; margin-top:10px;"></p>
+  </div>
+</div>
+
+<!-- LOCKED ALLOCATIONS -->
+<div class="section" id="locked">
+  <h2 style="text-align:center; font-size:2.2rem; color:#FFD700;">🔒 LOCKED ALLOCATIONS</h2>
+  <p style="text-align:center; color:#aaa; margin-bottom:30px;">Trust. Transparency. Long-term Vision.</p>
+  <div class="grid">
+    <div class="card" style="border-color:#FFD700;">
+      <h3 style="color:#FFD700;">👑 CREATOR RESERVE</h3>
+      <p style="font-size:2rem; font-weight:900; margin:10px 0;">21,00,000 DDN</p>
+      <p style="color:#4CAF50; font-weight:bold;">Status: LOCKED - Monthly Vesting</p>
+      <p style="margin-top:15px;">Unlock: <b>1,75,000 DDN / Month</b></p>
+      <p>Duration: <b>12 Months</b></p>
+      <p>Purpose: <b>Long-term Commitment</b></p>
+    </div>
+    <div class="card" style="border-color:#007BFF;">
+      <h3 style="color:#007BFF;">⚡ DEVELOPMENT FUND</h3>
+      <p style="font-size:2rem; font-weight:900; margin:10px 0;">10,50,000 DDN</p>
+      <p style="color:#4CAF50; font-weight:bold;">Status: LOCKED - Milestone Based</p>
+      <p style="margin-top:15px;">Unlock: <b>Feature / Milestone Based</b></p>
+      <p>Use: <b>App, Server, Security, Updates</b></p>
+      <p>Purpose: <b>Development Only</b></p>
+    </div>
+  </div>
+  <div class="card" style="text-align:center; background:linear-gradient(90deg,#FFD700,#007BFF); color:#000;">
+    <h3>TOTAL LOCKED</h3>
+    <p style="font-size:2.5rem; font-weight:900;">31,50,000 DDN</p>
+    <p>Locked for Ecosystem Growth & Trust</p>
+  </div>
+</div>
+
+<script>
+  // ===== OTP SYSTEM - DEMO =====
+  let generatedOTP = "";
+  function sendOTP(){
+    const email = document.getElementById('email').value;
+    if(!email){ alert("Email pettu bro!"); return; }
+    generatedOTP = Math.floor(100000 + Math.random()*900000).toString();
+    alert("Demo OTP: " + generatedOTP + " - EmailJS lo real mail ki vasthundi");
+    document.getElementById('loginMsg').innerText = "OTP sent to " + email;
+  }
+  function verifyOTP(){
+    const inp = document.getElementById('otpInput').value;
+    if(inp === generatedOTP && inp !== ""){ document.getElementById('loginMsg').innerText = "✅ Login Success! Welcome to Digital Dinar"; }
+    else { document.getElementById('loginMsg').innerText = "❌ Wrong OTP bro, malli try chey"; }
+  }
+
+  // ===== GOLD SOUND =====
+  let audioCtx; let balance = parseInt(localStorage.getItem('ddnBal')||'0');
+  document.getElementById('ddnBalance').innerText = balance;
+  function playGoldSound(){
+    if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+    const t = audioCtx.currentTime;
+    [2093,2637,3520].forEach((freq,i)=>{
+      const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+      osc.type='sine'; osc.frequency.value=freq;
+      gain.gain.setValueAtTime(0.25/(i+1),t); gain.gain.exponentialRampToValueAtTime(0.001,t+1.2);
+      osc.connect(gain); gain.connect(audioCtx.destination); osc.start(t); osc.stop(t+1.2);
+    });
+  }
+
+  // ===== FLYING DINARS =====
+  function spawnDinar(){
+    const el = document.createElement('div');
+    el.className='floating-dinar';
+    el.innerHTML = Math.random()>0.5 ? '🪙' : '<span style="color:#FFD700; font-weight:900; font-size:32px; text-shadow:0 0 15px #FFD700;">D</span>';
+    el.style.left = Math.random()*95+'vw';
+    el.style.animationDuration = (6+Math.random()*6)+'s';
+    el.style.fontSize = (28+Math.random()*25)+'px';
+    el.onclick = (e)=>{
+      playGoldSound();
+      balance++; localStorage.setItem('ddnBal',balance);
+      document.getElementById('ddnBalance').innerText = balance;
+      for(let i=0;i<6;i++){ const b=document.createElement('div'); b.className='gold-burst'; b.innerHTML='✨'; b.style.left=e.clientX+(Math.random()*40-20)+'px'; b.style.top=e.clientY+'px'; document.body.appendChild(b); setTimeout(()=>b.remove(),800); }
+      const plus=document.createElement('div'); plus.innerHTML='+1 DDN ✨'; plus.style.cssText=`position:fixed; left:${e.clientX}px; top:${e.clientY-20}px; color:#FFD700; font-weight:900; z-index:2001;`; document.body.appendChild(plus); setTimeout(()=>plus.remove(),1000);
+      el.remove();
+    };
+    document.getElementById('dinar-container').appendChild(el);
+    setTimeout(()=>el.remove(),12000);
+  }
+  setInterval(spawnDinar, 800);
+
+  // ===== PARTICLES =====
+  const canvas=document.getElementById('dinar-canvas'); const ctx=canvas.getContext('2d');
+  function resize(){ canvas.width=innerWidth; canvas.height=innerHeight; } resize(); addEventListener('resize',resize);
+  let parts=[]; for(let i=0;i<70;i++) parts.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,s:Math.random()*2+0.5,vx:(Math.random()-0.5)*0.5,vy:(Math.random()-0.5)*0.5});
+  function draw(){ ctx.clearRect(0,0,canvas.width,canvas.height); parts.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; if(p.x<0||p.x>canvas.width) p.vx*=-1; if(p.y<0||p.y>canvas.height) p.vy*=-1; ctx.beginPath(); ctx.arc(p.x,p.y,p.s,0,Math.PI*2); ctx.fillStyle='rgba(255,215,0,0.7)'; ctx.shadowBlur=10; ctx.shadowColor='#FFD700'; ctx.fill(); }); requestAnimationFrame(draw); } draw();
+</script>
+</body>
+</html>
