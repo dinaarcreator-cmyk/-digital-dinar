@@ -45,7 +45,7 @@ async function loadWallet(){
   const {data} = await supabaseClient.from('wallets').select('*').eq('user_id', currentUser.id).single();
   let bal = 0;
   if(!data){
-    bal = (currentUser.email === 'NEE-REAL-EMAIL@GMAIL.COM') ? 3150000 : 0;
+    bal = (currentUser.email === 'NEE-REAL-EMAIL-IKKADA-PETTU') ? 3150000 : 0;
     await supabaseClient.from('wallets').insert({user_id: currentUser.id, email: currentUser.email, balance: bal});
   } else bal = data.balance;
   document.getElementById('authBox').style.display='none';
