@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Digital Dinar - Sikka</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -28,10 +28,10 @@ const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 let currentUser = null;
 async function sendOTP(){
   const email = document.getElementById('email').value.trim();
-  if(!email) return alert('Email pettu bro');
+  if(!email) return alert('Please enter your email');
   const {error} = await supabaseClient.auth.signInWithOtp({email});
   if(error) document.getElementById('msg').innerText = error.message;
-  else document.getElementById('msg').innerText = 'OTP email ki pampam bro, check cheyyi!';
+  else document.getElementById('msg').innerText = 'OTP sent to your email, please check!';
 }
 async function verifyOTP(){
   const email = document.getElementById('email').value.trim();
