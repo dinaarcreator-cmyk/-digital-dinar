@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Digital Dinar - Sikka</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -45,7 +45,7 @@ async function loadWallet(){
   const {data} = await supabaseClient.from('wallets').select('*').eq('user_id', currentUser.id).single();
   let bal = 0;
   if(!data){
-    bal = (currentUser.email === 'founder@digitaldinar.com') ? 3150000 : 0;
+    bal = (currentUser.email === 'NEE-REAL-EMAIL@GMAIL.COM') ? 3150000 : 0;
     await supabaseClient.from('wallets').insert({user_id: currentUser.id, email: currentUser.email, balance: bal});
   } else bal = data.balance;
   document.getElementById('authBox').style.display='none';
