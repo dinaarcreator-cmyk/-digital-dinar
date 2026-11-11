@@ -63,7 +63,7 @@ table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13px}td,th{b
 <p style="text-align:center;color:#888;font-size:12px">Digital Dinar - Halal Mining Application - Founder: dinaarcreator</p>
 </div>
 <script>
-let bal=parseFloat(localStorage.getItem('ddn_app_bal')||'0');let block=10421;let pct=0;let nonce=0;let logged=localStorage.getItem('ddn_user')||'';let miningStarted=false; let FOUNDER_EMAIL='dinaarcreator@gmail.com'; let FOUNDER_WALLET='DDN-7A4F-9C2E-1042-1B8D-56F0-83A1-DINAR'; function isFounder(){ return (userEmail -eq FOUNDER_EMAIL) -or (userWallet -eq FOUNDER_WALLET) }
+let bal=parseFloat(localStorage.getItem('ddn_app_bal')||'0');let block=10421;let pct=0;let nonce=0;let logged=localStorage.getItem('ddn_user')||'';let miningStarted=false; let FOUNDER_EMAIL='dinaarcreator@gmail.com'; let FOUNDER_WALLET='DDN-7A4F-9C2E-1042-1B8D-56F0-83A1-DINAR'; function isFounder(){ return (userEmail === FOUNDER_EMAIL) || (userWallet === FOUNDER_WALLET) }
 function upd(){document.getElementById('bal').textContent=bal.toFixed(2);document.getElementById('block').textContent=block;document.getElementById('pct').textContent=Math.floor(pct)+'%';document.getElementById('bar').style.width=pct+'%';document.getElementById('hash').textContent=miningStarted?Math.floor(8500+Math.random()*4000)+' H/s':'0 H/s';document.getElementById('nonce').textContent=nonce.toLocaleString()}
 function log(t){let l=document.getElementById('log');let d=document.createElement('div');d.textContent='['+new Date().toLocaleTimeString()+'] '+t;l.prepend(d);if(l.children.length>7)l.lastChild.remove()}
 function play(){try{let c=new (window.AudioContext||window.webkitAudioContext)();let o=c.createOscillator(),g=c.createGain();o.frequency.value=2000;o.type='sine';g.gain.setValueAtTime(.25,c.currentTime);g.gain.exponentialRampToValueAtTime(.01,c.currentTime+.5);o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+.5)}catch(e){}}
@@ -85,4 +85,5 @@ setInterval(spawnDollar,800);for(let i=0;i<5;i++)setTimeout(spawnDollar,i*300);
 if(isFounder()){document.getElementById('founderWalletBox').style.display='block';} upd();
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}
 </script></body></html>
+
 
