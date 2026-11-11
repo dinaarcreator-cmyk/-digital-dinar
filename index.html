@@ -1,69 +1,82 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DIGITAL DINAR - Where Trust Meets Technology</title>
+<html lang="te"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DIGITAL DINAR - Halal Mining Office</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
-body{background:radial-gradient(circle at top,#0f0f2e 0%,#000 70%);color:#fff;overflow-x:hidden}
-.hero{text-align:center;padding:80px 20px 40px}
-.hero h1{font-size:3rem;background:linear-gradient(90deg,#FFD700,#FFA500);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hero p{color:#aaa;margin-top:10px}
-.btn{display:inline-block;margin:20px 10px;padding:14px 30px;background:linear-gradient(90deg,#FFD700,#FFA500);color:#000;font-weight:900;border-radius:50px;text-decoration:none;border:none;cursor:pointer}
-.btn-blue{background:linear-gradient(90deg,#007BFF,#00D4FF);color:#fff}
-.card{background:rgba(255,255,255,.05);border:1px solid rgba(255,215,0,.3);border-radius:15px;padding:25px;margin:15px}
-.section{max-width:1100px;margin:0 auto;padding:50px 20px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
-input{width:100%;padding:14px;margin:10px 0;border-radius:10px;border:1px solid #333;background:#111;color:#fff;font-size:16px}
-#dinar-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999}
-.floating-dinar{position:fixed;z-index:1000;pointer-events:auto;cursor:pointer;filter:drop-shadow(0 0 12px #FFD700);animation:floatUp linear infinite}
-@keyframes floatUp{0%{transform:translateY(110vh) rotate(0deg);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-10vh) rotate(360deg);opacity:0}}
-.gold-burst{position:fixed;pointer-events:none;z-index:1001;font-size:22px;animation:burst .8s ease-out forwards}
-@keyframes burst{0%{transform:scale(.5);opacity:1}100%{transform:translateY(-80px) scale(1.5);opacity:0}}
-.balance-box{position:fixed;top:15px;right:15px;background:rgba(0,0,0,.8);border:2px solid #FFD700;padding:10px 18px;border-radius:50px;z-index:2000;font-weight:900;color:#FFD700}
-</style>
-</head>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif}
+body{background:#050807;color:#fff;overflow-x:hidden}
+.topbar{background:#000;border-bottom:2px solid #FFD700;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:50}
+.topbar b{color:#FFD700;font-size:20px;letter-spacing:1px}
+.live{color:#00ff88;font-size:12px}.live i{display:inline-block;width:8px;height:8px;background:#00ff88;border-radius:50%;animation:blink 1s infinite}
+@keyframes blink{50%{opacity:.2}}
+.office{max-width:900px;margin:0 auto;padding:14px}
+.hero{background:linear-gradient(135deg,#0a1a12,#111);border:1px solid #FFD700;border-radius:16px;padding:18px;text-align:center}
+.hero h1{font-size:38px;color:#FFD700;letter-spacing:2px}
+.hero p{color:#ccc;font-size:13px;margin-top:6px}
+.mining-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:14px 0}
+@media(max-width:600px){.mining-grid{grid-template-columns:1fr 1fr}}
+.card{background:#0e1512;border:1px solid #2a3a32;border-radius:14px;padding:14px;text-align:center}
+.card small{color:#aaa;font-size:11px;letter-spacing:1px}.card b{font-size:24px;color:#FFD700;display:block;margin-top:4px}.card b.green{color:#00ff88}
+.miner-box{background:#000;border:2px solid #00ff88;border-radius:16px;padding:16px;margin:14px 0}
+.miner-head{display:flex;justify-content:space-between;align-items:center}
+.miner-head b{color:#00ff88}.miner-head span{background:#00ff88;color:#000;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:bold;animation:blink 1s infinite}
+.progress{height:18px;background:#222;border-radius:20px;overflow:hidden;margin:12px 0}
+#bar{height:100%;width:0%;background:linear-gradient(90deg,#FFD700,#00ff88);transition:width .3s}
+.log{background:#050807;height:120px;overflow:hidden;border:1px solid #222;border-radius:10px;padding:10px;font-family:monospace;font-size:12px;color:#00ff88;text-align:left;line-height:1.8}
+.halal{background:#111;border:1px solid #FFD700;border-radius:16px;padding:16px;margin:14px 0}
+.halal h2{color:#FFD700;text-align:center;font-size:18px}.halal p{font-size:13px;color:#ddd;line-height:1.7;margin-top:8px}
+.arabic{font-size:21px;color:#FFD700;text-align:center;line-height:2;direction:rtl}.ref{font-size:11px;color:#00ff88;text-align:center}
+.btn{background:#FFD700;color:#000;border:none;padding:13px 18px;border-radius:30px;font-weight:bold;font-size:15px;cursor:pointer;margin:5px;width:100%}
+.btn2{background:#00ff88}
+#ayatLayer,#dollarLayer{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:5}
+.ayatFly{position:absolute;top:-90px;background:rgba(0,0,0,.85);border:1px solid #FFD700;color:#FFD700;padding:7px 12px;border-radius:20px;font-size:19px;direction:rtl;animation:fall linear forwards}
+.dollar{position:absolute;top:-60px;width:56px;height:56px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff59d,#FFD700 55%,#b8860b);color:#0a4d00;font-size:30px;font-weight:900;display:flex;align-items:center;justify-content:center;border:3px solid #fff3a0;box-shadow:0 0 18px #FFD700;animation:fall linear forwards;cursor:pointer;pointer-events:auto}
+.dollar small{position:absolute;bottom:4px;font-size:7px;color:#7a5200;letter-spacing:1px}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+</style></head>
 <body>
-<div class="balance-box">COIN <span id="ddnBalance">0</span> DDN</div>
-<canvas id="dinar-canvas"></canvas>
-<div id="dinar-container"></div>
-<div class="hero">
-<h1>DIGITAL DINAR</h1>
-<p>Where Trust Meets Technology</p>
-<p style="color:#FFD700">Secure OTP | Premium Experience | Built for Future</p>
-<a href="#login" class="btn">LOGIN / SIGNUP</a>
-<a href="#locked" class="btn btn-blue">VIEW LOCKED COINS</a>
+<div id="ayatLayer"></div><div id="dollarLayer"></div>
+<div class="topbar"><b>DIGITAL DINAR</b><div class="live"><i></i> LIVE MINING • OFFICE</div><div style="font-size:12px;color:#FFD700">HALAL • NO RIBA</div></div>
+<div class="office">
+<div class="hero"><h1>DIGITAL DINAR</h1><p>HALAL SIKKA MINING OFFICE • SURATUL JINN • 100% HALAL INCOME</p><p style="color:#00ff88;font-weight:bold">MINING RUNNING - NUVVU CHUSTHUNNAPPUDU KUDA SIKKA PERUGUTHUNDI</p></div>
+
+<div class="mining-grid">
+<div class="card"><small>YOUR SIKKA BALANCE</small><b id="bal">0</b><small>SIKKA = DDN</small></div>
+<div class="card"><small>HASH RATE</small><b class="green" id="hash">0 H/s</b><small>MINING POWER</small></div>
+<div class="card"><small>TOTAL MINED TODAY</small><b id="today">0</b><small>SIKKA</small></div>
+<div class="card"><small>MINING SPEED</small><b class="green" id="speed">+0.00 / sec</b><small>AUTO MINING</small></div>
+<div class="card"><small>LOCKED - CREATOR</small><b>21,00,000</b><small>SIKKA</small></div>
+<div class="card"><small>LOCKED - TOTAL</small><b>31,50,000</b><small>SIKKA • HALAL</small></div>
 </div>
-<div class="section" id="login">
-<div class="card" style="max-width:450px;margin:0 auto;text-align:center">
-<h2>Login / Signup</h2>
-<p style="color:#aaa">OTP will be sent to your Email</p>
-<input type="email" id="email" placeholder="Enter your Email">
-<button class="btn" onclick="sendOTP()">SEND OTP</button>
-<input type="text" id="otpInput" placeholder="Enter OTP">
-<button class="btn btn-blue" onclick="verifyOTP()">VERIFY & LOGIN</button>
-<p id="loginMsg" style="color:#4CAF50;margin-top:10px"></p>
-</div>
-</div>
-<div class="section" id="locked">
-<h2 style="text-align:center;font-size:2.2rem;color:#FFD700">LOCKED ALLOCATIONS</h2>
-<p style="text-align:center;color:#aaa;margin-bottom:30px">Trust. Transparency. Long-term Vision.</p>
-<div class="grid">
-<div class="card"><h3 style="color:#FFD700">CREATOR RESERVE</h3><p style="font-size:2rem;font-weight:900;margin:10px 0">21,00,000 DDN</p><p style="color:#4CAF50;font-weight:bold">Status: LOCKED - Monthly Vesting</p><p style="margin-top:15px">Unlock: <b>1,75,000 DDN / Month</b></p><p>Duration: <b>12 Months</b></p></div>
-<div class="card"><h3 style="color:#007BFF">DEVELOPMENT FUND</h3><p style="font-size:2rem;font-weight:900;margin:10px 0">10,50,000 DDN</p><p style="color:#4CAF50;font-weight:bold">Status: LOCKED - Milestone Based</p><p style="margin-top:15px">Use: <b>App, Server, Security</b></p><p>Purpose: <b>Development Only</b></p></div>
-</div>
-<div class="card" style="text-align:center;background:linear-gradient(90deg,#FFD700,#007BFF);color:#000"><h3>TOTAL LOCKED</h3><p style="font-size:2.5rem;font-weight:900">31,50,000 DDN</p><p>Locked for Ecosystem Growth & Trust</p></div>
+
+<div class="miner-box"><div class="miner-head"><b>⛏️ MINER ACTIVE</b><span>● MINING...</span></div><div class="progress"><div id="bar"></div></div><div style="display:flex;justify-content:space-between;font-size:12px;color:#aaa"><span>Block #<span id="block">10241</span></span><span>Reward: <b style="color:#FFD700">1 SIKKA / BLOCK</b></span><span id="pct">0%</span></div><div class="log" id="log"></div><button class="btn" onclick="boost()">⚡ BOOST MINING +10 SIKKA</button><button class="btn btn2" onclick="claim()">+1 SIKKA CLAIM CHEY</button></div>
+
+<div class="halal"><h2>HALAL INCOME - QURAN NUNCHI</h2>
+<p><b>Suratul Jinn 72:16 -</b> Straight Path lo unte Allah Rizq isthadu. Ee mining lo Riba ledhu, Gambling ledhu, Mosam ledhu - Only Mehnat + Halal Sikka.</p>
+<div class="arabic">وَأَن لَّوِ اسْتَقَامُوا عَلَى الطَّرِيقَةِ لَأَسْقَيْنَاهُم مَّاءً غَدَقًا</div><div class="ref">Suratul Jinn 72:16</div>
+<p><b>Halal Rizq -</b> Allah cheppadu Halal ga sampadinchi Tayyib thinandi.</p>
+<div class="arabic">يَا أَيُّهَا الَّذِينَ آمَنُوا كُلُوا مِن طَيِّبَاتِ مَا رَزَقْنَاكُمْ</div><div class="ref">Surah Al-Baqarah 2:172</div>
+<p><b>Taqwa -</b> Allah ki bhayapadithe oohinchani chota nunchi Rizq vasthundi.</p>
+<div class="arabic">وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا • وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ</div><div class="ref">Surah At-Talaq 65:2-3</div>
+<p style="text-align:center;color:#FFD700"><b>RULE: NO RIBA • NO GAMBLING • NO HARAM • ONLY HALAL SIKKA</b></p></div>
+
+<div style="text-align:center;padding:10px"><input id="ph" placeholder="Mobile Number" style="padding:12px;border-radius:20px;border:1px solid #555;background:#111;color:#fff;width:100%;max-width:320px"><br><br><button class="btn" onclick="sendOTP()">OTP PAMPU - LOGIN</button><p style="color:#888;font-size:12px;margin-top:10px">Digital Dinar - Halal Mining Office • Founder: dinaarcreator</p></div>
 </div>
 <script>
-let generatedOTP="";
-function sendOTP(){const e=document.getElementById('email').value;if(!e){alert("Email pettu bro!");return}generatedOTP=Math.floor(100000+Math.random()*900000).toString();alert("Demo OTP: "+generatedOTP);document.getElementById('loginMsg').innerText="OTP sent to "+e}
-function verifyOTP(){const i=document.getElementById('otpInput').value;if(i===generatedOTP&&i!==""){document.getElementById('loginMsg').innerText="Login Success! Welcome to Digital Dinar"}else{document.getElementById('loginMsg').innerText="Wrong OTP bro, malli try chey"}}
-let audioCtx;let balance=parseInt(localStorage.getItem('ddnBal')||'0');document.getElementById('ddnBalance').innerText=balance;
-function playGoldSound(){if(!audioCtx)audioCtx=new (window.AudioContext||window.webkitAudioContext)();const t=audioCtx.currentTime;[2093,2637,3520].forEach((f,i)=>{const o=audioCtx.createOscillator();const g=audioCtx.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(.25/(i+1),t);g.gain.exponentialRampToValueAtTime(.001,t+1.2);o.connect(g);g.connect(audioCtx.destination);o.start(t);o.stop(t+1.2)})}
-function spawnDinar(){const el=document.createElement('div');el.className='floating-dinar';el.innerHTML='COIN';el.style.left=Math.random()*95+'vw';el.style.animationDuration=(6+Math.random()*6)+'s';el.style.fontSize=(28+Math.random()*25)+'px';el.onclick=(e)=>{playGoldSound();balance++;localStorage.setItem('ddnBal',balance);document.getElementById('ddnBalance').innerText=balance;for(let i=0;i<6;i++){const b=document.createElement('div');b.className='gold-burst';b.innerHTML='STAR';b.style.left=e.clientX+(Math.random()*40-20)+'px';b.style.top=e.clientY+'px';document.body.appendChild(b);setTimeout(()=>b.remove(),800)}const p=document.createElement('div');p.innerHTML='+1 DDN';p.style.cssText='position:fixed;left:'+e.clientX+'px;top:'+(e.clientY-20)+'px;color:#FFD700;font-weight:900;z-index:2001';document.body.appendChild(p);setTimeout(()=>p.remove(),1000);el.remove()};document.getElementById('dinar-container').appendChild(el);setTimeout(()=>el.remove(),12000)}
-setInterval(spawnDinar,800);
-const canvas=document.getElementById('dinar-canvas');const ctx=canvas.getContext('2d');function resize(){canvas.width=innerWidth;canvas.height=innerHeight}resize();addEventListener('resize',resize);let parts=[];for(let i=0;i<70;i++)parts.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,s:Math.random()*2+.5,vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5});function draw(){ctx.clearRect(0,0,canvas.width,canvas.height);parts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>canvas.width)p.vx*=-1;if(p.y<0||p.y>canvas.height)p.vy*=-1;ctx.beginPath();ctx.arc(p.x,p.y,p.s,0,Math.PI*2);ctx.fillStyle='rgba(255,215,0,.7)';ctx.shadowBlur=10;ctx.shadowColor='#FFD700';ctx.fill()});requestAnimationFrame(draw)}draw();
-</script>
-</body>
-</html>
+let bal=parseFloat(localStorage.getItem('ddn_mine')||'0');let today=0;let block=10241;let pct=0;
+function fmt(n){return n.toFixed(2)}
+function update(){document.getElementById('bal').textContent=fmt(bal);document.getElementById('today').textContent=fmt(today);document.getElementById('block').textContent=block;document.getElementById('pct').textContent=Math.floor(pct)+'%';document.getElementById('bar').style.width=pct+'%';document.getElementById('hash').textContent=Math.floor(1200+Math.random()*800)+' H/s';document.getElementById('speed').textContent='+'+(0.05+Math.random()*0.1).toFixed(3)+' / sec'}
+function log(t){let l=document.getElementById('log');let d=document.createElement('div');d.textContent='['+new Date().toLocaleTimeString()+'] '+t;l.prepend(d);if(l.children.length>6)l.lastChild.remove()}
+function play(){try{let c=new (window.AudioContext||window.webkitAudioContext)();let o=c.createOscillator(),g=c.createGain();o.frequency.value=1800;o.type='sine';g.gain.setValueAtTime(.25,c.currentTime);g.gain.exponentialRampToValueAtTime(.01,c.currentTime+.5);o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+.5)}catch(e){}}
+function claim(){bal++;today++;localStorage.setItem('ddn_mine',bal);update();play();log('Claimed +1 SIKKA ($)')}
+function boost(){bal+=10;today+=10;localStorage.setItem('ddn_mine',bal);update();play();log('BOOST! +10 SIKKA mined!')}
+function sendOTP(){let p=document.getElementById('ph').value;if(!p){alert('Mobile ivvu bro');return}alert('OTP sent to '+p+' (Demo) 1234')}
+// AUTO MINING - PAKKA RUN AVUTHUNDI
+setInterval(()=>{let earn=0.02+Math.random()*0.05;bal+=earn;today+=earn;pct+=8+Math.random()*10;if(pct>=100){pct=0;block++;bal+=1;today+=1;log('Block #'+block+' MINED! +1 SIKKA Reward!');play()}localStorage.setItem('ddn_mine',bal);update()},1000);
+setInterval(()=>{log('Mining... Hash found - '+Math.floor(Math.random()*999999)+' - Halal Block')},4000);
+let ayats=["وَأَن لَّوِ اسْتَقَامُوا عَلَى الطَّرِيقَةِ لَأَسْقَيْنَاهُم مَّاءً غَدَقًا","يَا أَيُّهَا الَّذِينَ آمَنُوا كُلُوا مِن طَيِّبَاتِ مَا رَزَقْنَاكُمْ","وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا","وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ"];
+function spawnAyat(){let d=document.createElement('div');d.className='ayatFly';d.textContent=ayats[Math.floor(Math.random()*ayats.length)];d.style.left=Math.random()*70+'vw';let dur=11+Math.random()*5;d.style.animationDuration=dur+'s';document.getElementById('ayatLayer').appendChild(d);setTimeout(()=>d.remove(),dur*1000)}
+setInterval(spawnAyat,3000);spawnAyat();
+function spawnDollar(){let d=document.createElement('div');d.className='dollar';d.innerHTML='$<small>SIKKA</small>';d.style.left=Math.random()*90+'vw';let dur=5+Math.random()*4;d.style.animationDuration=dur+'s';d.onclick=()=>{claim();d.remove()};document.getElementById('dollarLayer').appendChild(d);setTimeout(()=>d.remove(),dur*1000)}
+setInterval(spawnDollar,800);for(let i=0;i<5;i++)setTimeout(spawnDollar,i*300);
+update();log('Miner Started - Halal Mining Running...');log('Connected to Digital Dinar Network...');
+</script></body></html>
